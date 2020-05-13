@@ -14,13 +14,12 @@ $userLevel = auth()->user()->level;
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li class="{{ $elementActive == 'dashboard' ? 'active' : '' }}">
-                <a href="{{ route('page.index', 'dashboard') }}">
+            <li class="{{ $elementActive == 'laundry' ? 'active' : '' }}">
+                <a href="{{ route('laundry.index') }}">
                     <i class="nc-icon nc-bank"></i>
-                    <p>{{ __('Dashboard') }}</p>
+                    <p>{{ __('Laundry') }}</p>
                 </a>
             </li>
-
             @if($userLevel != 'kasir')
             <li class="{{ $elementActive == 'pembelian' ? 'active' : '' }}">
                 <a href="{{ route('pembelian.index') }}">
@@ -37,7 +36,7 @@ $userLevel = auth()->user()->level;
                 </a>
             </li>
             @endif
-            <li class="{{ $elementActive == 'laporanpembelian' || $elementActive == 'laporanpemakaian' ? 'active' : '' }}">
+            <li class="{{ $elementActive == 'laporanpembelian' || $elementActive == 'laporanlaundry' ? 'active' : '' }}">
                 <a data-toggle="collapse" aria-expanded="true" href="#laporan">
                     <i class="nc-icon"><img src="{{ asset('paper/img/laravel.svg') }}"></i>
                     <p>
@@ -53,8 +52,8 @@ $userLevel = auth()->user()->level;
                                 <span class="sidebar-normal">{{ __(' Laporan Pembelian ') }}</span>
                             </a>
                         </li>
-                        <li class="{{ $elementActive == 'laporanpemakaian' ? 'active' : '' }}">
-                            <a href="{{ route('laporanpemakaian') }}">
+                        <li class="{{ $elementActive == 'laporanlaundry' ? 'active' : '' }}">
+                            <a href="{{ route('laporanlaundry') }}">
                                 <span class="sidebar-mini-icon">{{ __('LP') }}</span>
                                 <span class="sidebar-normal">{{ __(' Laporan Penjualan ') }}</span>
                             </a>
@@ -80,14 +79,6 @@ $userLevel = auth()->user()->level;
                             <a href="{{ route('supplier.index', 'user') }}">
                                 <span class="sidebar-mini-icon">{{ __('S') }}</span>
                                 <span class="sidebar-normal">{{ __(' Supplier ') }}</span>
-                            </a>
-                        </li>
-                        @endif
-                        @if($userLevel != 'kepala')
-                        <li class="{{ $elementActive == 'customer' ? 'active' : '' }}">
-                            <a href="{{ route('customer.index') }}">
-                                <span class="sidebar-mini-icon">{{ __('C') }}</span>
-                                <span class="sidebar-normal">{{ __(' Customer ') }}</span>
                             </a>
                         </li>
                         @endif

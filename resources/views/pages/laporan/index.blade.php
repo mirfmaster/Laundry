@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-'elementActive' => $type
+'elementActive' => laporan
 ])
 
 
@@ -25,25 +25,25 @@
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">Nama Pelanggan</th>
+                                <th scope="col">Nomor Faktur</th>
+                                <th scope="col">Metode Bayar</th>
+                                <th scope="col">Nama Supplier</th>
                                 <th scope="col">Nomor Telpon</th>
-                                <th scope="col">Jenis Layanan</th>
-                                <th scope="col">Harga</th>
-                                <th scope="col">Berat</th>
-                                <th scope="col">Total</th>
-                                <th scope="col">Tanggal Laundry</th>
+                                <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($data as $pemakaian)
+                            @foreach($data as $supplier)
                             <tr>
-                                <td>{{ $pemakaian->nama_pelanggan }}</td>
-                                <td>{{ $pemakaian->telp }}</td>
-                                <td>{{ $pemakaian->layanan->nama }}</td>
-                                <td>{{ $pemakaian->layanan->harga }}</td>
-                                <td>{{ $pemakaian->berat }}</td>
-                                <td>{{ $pemakaian->berat * $pemakaian->layanan->harga }}</td>
-                                <td>{{ date('d-M-Y H:i', strtotime($pemakaian->created_at)) }}</td>
+                                <td>{{ $supplier->no_faktur }}</td>
+                                <td>{{ $supplier->metode_bayar }}</td>
+                                <td>{{ $supplier->supplier->nama }}</td>
+                                <td>{{ $supplier->supplier->telp }}</td>
+                                <td>
+                                    <button type="submit" class="btn" style="padding: 5px 6px;font-size:1.7rem" title="Details" onclick="handleDetail({{$supplier}})">
+                                        <i class="nc-icon nc-bullet-list-67 text-warning"></i>
+                                    </button>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -72,12 +72,20 @@
                             <td id="no_faktur"></td>
                         </tr>
                         <tr>
-                            <td>Petugas</td>
-                            <td id="petugas"></td>
+                            <td>Metode Bayar</td>
+                            <td id="metode_bayar"></td>
                         </tr>
                         <tr>
-                            <td>Waktu Pemakaian</td>
-                            <td id="waktu"></td>
+                            <td>Nama Supplier</td>
+                            <td id="nama_supplier"></td>
+                        </tr>
+                        <tr>
+                            <td>Nomor Telpon</td>
+                            <td id="telp"></td>
+                        </tr>
+                        <tr>
+                            <td>Total Pembelian</td>
+                            <td id="total"></td>
                         </tr>
                     </thead>
                 </table>
@@ -86,7 +94,9 @@
                     <thead>
                         <tr>
                             <td>Item</td>
+                            <td>Harga Beli</td>
                             <td>Jumlah</td>
+                            <td>Total</td>
                         </tr>
                     </thead>
                     <tbody id="tbody">
@@ -100,7 +110,6 @@
         </div>
     </div>
 </div>
-
 @endsection
 
 @push('scripts')
@@ -108,13 +117,18 @@
     const handleDetail = (data) => {
         console.log(data)
         $('#no_faktur').html(data.no_faktur)
-        $('#petugas').html(data.user.name)
-        $('#waktu').html(data.created_at.toLocaleString())
+        $('#no_surat_jalan').html(data.no_surat_jalan)
+        $('#metode_bayar').html(data.metode_bayar)
+        $('#nama_supplier').html(data.supplier && data.supplier.nama)
+        $('#telp').html(data.supplier && data.supplier.telp)
+        $('#total').html(data.total)
         $('#tbody').empty()
-        data.details.map((a) => {
+        data.details.map((item) => {
             $('#tbody').append(`<tr>
-            <td>${a.item.nama}</td>
-            <td>${a.jumlah}</td>
+            <td>${item.item.nama}</td>
+            <td>${item.harga_beli}</td>
+            <td>${item.jumlah}</td>
+            <td>${item.total}</td>
         </tr>`)
         })
 

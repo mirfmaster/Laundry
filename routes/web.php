@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('pemakaian/receipt/{id}', 'PemakaianController@receipt')->name('receipt');
 	Route::get('laporan/pembelian', 'PembelianController@laporan')->name('laporanpembelian');
-	Route::get('laporan/pemakaian', 'PemakaianController@laporan')->name('laporanpemakaian');
+	Route::get('laporan/laundry', 'PemakaianController@laporan')->name('laporanlaundry');
 
 	Route::resource('user', 'UserController', ['except' => ['show']]);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('layanan', 'LayananController');
 	Route::resource('pembelian', 'PembelianController');
 	Route::resource('pemakaian', 'PemakaianController');
+	Route::resource('laundry', 'LaundryController');
 });
 
 Route::group(['middleware' => 'auth'], function () {

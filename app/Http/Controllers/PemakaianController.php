@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\Item;
+use App\Laundry;
 use App\Pemakaian;
 use App\PemakaianDetail;
 use PDF;
@@ -18,7 +19,7 @@ class PemakaianController extends Controller
      */
     public function index()
     {
-        $data = Pemakaian::with(['user', 'details.item'])->get();
+        $data = Laundry::with(['user', 'details.item'])->get();
         $type = 'pemakaian';
 
         return view('pages.pemakaian.index', compact(['data', 'type']));
@@ -131,7 +132,7 @@ class PemakaianController extends Controller
 
     public function laporan()
     {
-        $data = Pemakaian::with(['details.returpemakaian', 'details.sukucadang', 'customer'])->get();
+        $data = Laundry::with(['layanan'])->get();
         $type = 'laporanpemakaian';
 
         return view('pages.pemakaian.index', compact(['data', 'type']));

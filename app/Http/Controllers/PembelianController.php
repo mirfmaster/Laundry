@@ -131,7 +131,7 @@ class PembelianController extends Controller
 
     public function laporan()
     {
-        $data = Pembelian::with(['details.returpembelian', 'details.item', 'supplier'])->get();
+        $data = Pembelian::with(['details.item', 'supplier'])->get();
         $type = "laporanpembelian";
 
         return view('pages.pembelian.index', compact(['data', 'type']));
