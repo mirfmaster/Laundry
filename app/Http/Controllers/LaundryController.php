@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Laundry;
 use App\Layanan;
+use PDF;
 use Illuminate\Http\Request;
 
 class LaundryController extends Controller
@@ -46,10 +47,9 @@ class LaundryController extends Controller
         $laundry->berat = $request->berat;
         $laundry->total = $request->total;
         $laundry->layanan_id = $request->layanan_id;
-
         $laundry->save();
 
-        return redirect()->back()->withMessage('Pembelian Sukses. Stock berhasil di tambahkan!');
+        return redirect()->back()->withMessage('Laundry Sukses, Click <a href="' . route('receipt', $laundry->id) . '" style="color:#ef8157" target="_blank">here</a> to print receipt');
     }
 
     /**
@@ -98,5 +98,13 @@ class LaundryController extends Controller
     public function destroy(Laundry $laundry)
     {
         //
+    }
+
+    public function receipt($id)
+    {
+        $data = Laundry::with(['layanan'])->findOrFail($id);
+        $pdf = PDF::loadView('pdf.laundry', compact(['data', 'readonly']));
+
+        return $pdf->stream();
     }
 }

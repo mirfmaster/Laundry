@@ -22,7 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
-	Route::get('pemakaian/receipt/{id}', 'PemakaianController@receipt')->name('receipt');
+	Route::get('laundry/receipt/{id}', 'LaundryController@receipt')->name('receipt');
 	Route::get('laporan/pembelian', 'PembelianController@laporan')->name('laporanpembelian');
 	Route::get('laporan/laundry', 'PemakaianController@laporan')->name('laporanlaundry');
 

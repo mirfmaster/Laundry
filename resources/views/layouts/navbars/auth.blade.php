@@ -3,12 +3,12 @@ $userLevel = auth()->user()->level;
 ?>
 <div class="sidebar" data-color="white" data-active-color="danger">
     <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+        <a href="" class="simple-text logo-mini">
             <div class="logo-image-small">
-                <img src="{{ asset('paper') }}/img/logo-small.png">
+                <img src="{{ asset('paper') }}/img/laundry.png">
             </div>
         </a>
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+        <a href="" class="simple-text logo-normal">
             {{ __('Laundry') }}
         </a>
     </div>
@@ -98,7 +98,7 @@ $userLevel = auth()->user()->level;
                 </div>
             </li>
             @if($userLevel == 'admin')
-            <li class="{{ $elementActive == 'user' || $elementActive == 'profile' ? 'active' : '' }}">
+            <!-- <li class="{{ $elementActive == 'user' || $elementActive == 'profile' ? 'active' : '' }}">
                 <a data-toggle="collapse" aria-expanded="true" href="#laravelExamples">
                     <i class="nc-icon"><img src="{{ asset('paper/img/laravel.svg') }}"></i>
                     <p>
@@ -122,7 +122,7 @@ $userLevel = auth()->user()->level;
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> -->
             @endif
             <!-- <li class="{{ $elementActive == 'icons' ? 'active' : '' }}">
                 <a href="{{ route('page.index', 'icons') }}">
