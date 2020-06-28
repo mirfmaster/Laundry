@@ -111,8 +111,8 @@
                 <td>{{$detail->harga_jual}}</td>
                 <td>{{$detail->jumlah}}</td>
                 <td>{{$detail->total}}</td>
-            <tr>
-                @endforeach
+            </tr>
+            @endforeach
         </tbody>
     </table>
     <div class="page-break"></div>
