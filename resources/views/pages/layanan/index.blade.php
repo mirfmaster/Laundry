@@ -28,7 +28,7 @@
                             <tr>
                                 <th scope="col">Nama Layanan</th>
                                 <th scope="col">Harga</th>
-                                <th scope="col">Waktu (Menit)</th>
+                                <th scope="col">Waktu (Jam)</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -44,7 +44,8 @@
                                             <i class="nc-icon nc-settings text-warning"></i>
                                         </button>
                                     </a>
-                                    <button type="submit" class="btn" style="padding: 5px 6px;font-size:1.7rem" onclick="del(`{{ url('layanan') }}`, {{$layanan->id}} )">
+                                    <button type="submit" class="btn" style="padding: 5px 6px;font-size:1.7rem"
+                                        onclick="del(`{{ url('layanan') }}`, {{$layanan->id}} )">
                                         <i class="nc-icon nc-simple-remove text-danger"></i>
                                     </button>
                                 </td>

@@ -31,15 +31,18 @@
                         @endif
                         <div class="form-group">
                             <label>Nama</label>
-                            <input type="text" name="nama" class="form-control" placeholder="Masukan Nama" value="{{ $data->nama }}" required>
+                            <input type="text" name="nama" class="form-control" placeholder="Masukan Nama"
+                                value="{{ $data->nama }}" required>
                         </div>
                         <div class="form-group">
                             <label>Harga</label>
-                            <input type="text" name="harga" class="form-control" placeholder="Masukan Harga" value="{{ $data->harga }}" required>
+                            <input type="text" name="harga" class="form-control" placeholder="Masukan Harga"
+                                value="{{ $data->harga }}" required>
                         </div>
                         <div class="form-group">
                             <label>Waktu Proses</label>
-                            <input type="number" name="waktu" class="form-control" placeholder="Masukan dalam bentuk menit (1 Jam = 60)" value="{{ $data->waktu }}" required>
+                            <input type="number" name="waktu" class="form-control"
+                                placeholder="Masukan dalam bentuk jam" value="{{ $data->waktu }}" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
