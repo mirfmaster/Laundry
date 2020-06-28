@@ -27,11 +27,18 @@
                         @endif
                         <div class="form-group">
                             <label>Nama</label>
-                            <input type="text" name="nama" class="form-control" placeholder="Masukan Nama" value="{{ $data->nama }}">
+                            <input type="text" name="nama" class="form-control" placeholder="Masukan Nama"
+                                value="{{ $data->nama }}">
                         </div>
                         <div class="form-group">
                             <label>Jenis</label>
-                            <input type="text" name="jenis" class="form-control" placeholder="Masukan Jenis Item" value="{{ $data->jenis }}">
+                            <input type="text" name="jenis" class="form-control" placeholder="Masukan Jenis Item"
+                                value="{{ $data->jenis }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Stock</label>
+                            <input type="text" name="stock" class="form-control" placeholder="Masukan Stock Item"
+                                value="{{ $data->stock }}">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
