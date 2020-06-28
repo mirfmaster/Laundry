@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('customer', 'CustomerController');
 	Route::resource('item', 'ItemController');
 	Route::resource('layanan', 'LayananController');
+	Route::resource('member', 'MemberController');
 	Route::resource('pembelian', 'PembelianController');
 	Route::resource('pemakaian', 'PemakaianController');
 	Route::resource('laundry', 'LaundryController');

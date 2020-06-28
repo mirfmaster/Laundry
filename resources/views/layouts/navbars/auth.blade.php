@@ -36,7 +36,8 @@ $userLevel = auth()->user()->level;
                 </a>
             </li>
             @endif
-            <li class="{{ $elementActive == 'laporanpembelian' || $elementActive == 'laporanlaundry' ? 'active' : '' }}">
+            <li
+                class="{{ $elementActive == 'laporanpembelian' || $elementActive == 'laporanlaundry' ? 'active' : '' }}">
                 <a data-toggle="collapse" aria-expanded="true" href="#laporan">
                     <i class="nc-icon"><img src="{{ asset('paper/img/laravel.svg') }}"></i>
                     <p>
@@ -92,6 +93,12 @@ $userLevel = auth()->user()->level;
                             <a href="{{ route('layanan.index') }}">
                                 <span class="sidebar-mini-icon">{{ __('L') }}</span>
                                 <span class="sidebar-normal">{{ __(' Layanan ') }}</span>
+                            </a>
+                        </li>
+                        <li class="{{ $elementActive == 'member' ? 'active' : '' }}">
+                            <a href="{{ route('member.index') }}">
+                                <span class="sidebar-mini-icon">{{ __('M') }}</span>
+                                <span class="sidebar-normal">{{ __(' Member ') }}</span>
                             </a>
                         </li>
                     </ul>
