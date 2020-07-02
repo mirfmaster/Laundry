@@ -86,6 +86,8 @@ class LayananController extends Controller
         $layanan->nama = $request->nama;
         $layanan->harga = $request->harga;
         $layanan->waktu = $request->waktu;
+        $layanan->harga_satuan = $request->harga_satuan;
+        $layanan->flag_express = $request->flag_express;
         $layanan->save();
 
         return redirect()->route('layanan.index');

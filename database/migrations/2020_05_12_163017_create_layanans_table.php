@@ -17,6 +17,8 @@ class CreateLayanansTable extends Migration
             $table->id();
             $table->string('nama');
             $table->integer('harga');
+            $table->integer('harga_satuan');
+            $table->boolean('flag_express');
             $table->integer('waktu');
             $table->timestamps();
         });

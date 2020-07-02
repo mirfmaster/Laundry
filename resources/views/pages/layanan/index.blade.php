@@ -28,7 +28,9 @@
                             <tr>
                                 <th scope="col">Nama Layanan</th>
                                 <th scope="col">Harga</th>
+                                <th scope="col">Harga Satuan</th>
                                 <th scope="col">Waktu (Jam)</th>
+                                <th scope="col">Express</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -37,7 +39,9 @@
                             <tr>
                                 <td>{{ $layanan->nama }}</td>
                                 <td>{{ $layanan->harga }}</td>
+                                <td>{{ $layanan->harga_satuan }}</td>
                                 <td>{{ $layanan->waktu }}</td>
+                                <td>{{ $layanan->flag_express ? "Ya" : "Tidak" }}</td>
                                 <td>
                                     <a href="{{ route('layanan.edit', $layanan->id) }}">
                                         <button type="submit" class="btn" style="padding: 5px 6px;font-size:1.7rem">

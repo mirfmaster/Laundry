@@ -40,9 +40,23 @@
                                 value="{{ $data->harga }}" required>
                         </div>
                         <div class="form-group">
+                            <label>Harga Satuan</label>
+                            <input type="text" name="harga_satuan" class="form-control"
+                                placeholder="Masukan Harga Satuan" value="{{ $data->harga_satuan }}" required>
+                        </div>
+                        <div class="form-group">
                             <label>Waktu Proses</label>
                             <input type="number" name="waktu" class="form-control"
                                 placeholder="Masukan dalam bentuk jam" value="{{ $data->waktu }}" required>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="flag_express" value="1">
+                                Layanan Express
+                                <span class="form-check-sign">
+                                    <span class="check"></span>
+                                </span>
+                            </label>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
