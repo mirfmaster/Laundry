@@ -39,10 +39,10 @@
                             <input type="text" name="harga" class="form-control" placeholder="Masukan Harga"
                                 value="{{ $data->harga }}" required>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="satuan">
                             <label>Harga Satuan</label>
-                            <input type="text" name="harga_satuan" class="form-control"
-                                placeholder="Masukan Harga Satuan" value="{{ $data->harga_satuan }}" required>
+                            <input type="text" name="harga_satuan" id="harga_satuan" class="form-control"
+                                placeholder="Masukan Harga Satuan" value="{{ $data->harga_satuan }}">
                         </div>
                         <div class="form-group">
                             <label>Waktu Proses</label>
@@ -51,7 +51,8 @@
                         </div>
                         <div class="form-check">
                             <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" name="flag_express" value="1">
+                                <input class="form-check-input" type="checkbox" name="flag_express"
+                                    {{$data->flag_express ? 'checked' : ''}} onchange="handleFlag()">
                                 Layanan Express
                                 <span class="form-check-sign">
                                     <span class="check"></span>
@@ -66,3 +67,23 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    let express = '@json($data->flag_express)'
+
+    $(document).ready(() => {
+        handleFlag()
+    })
+    const handleFlag = () => {
+        if(express){
+            $('#harga_satuan').val()
+            $('#satuan').hide()    
+        } else {
+            $('#satuan').show()
+        }
+            express = !express
+        console.log(express)
+    }
+</script>
+@endpush

@@ -21,7 +21,8 @@
                         @csrf
                         <div class="form-group">
                             <label>Nama Pelanggan</label>
-                            <input type="text" name="nama_pelanggan" class="form-control" placeholder="Masukan Nama Pelanggan" required>
+                            <input type="text" name="nama_pelanggan" class="form-control"
+                                placeholder="Masukan Nama Pelanggan" required>
                         </div>
                         <div class="form-group">
                             <label>No Telp</label>
@@ -30,16 +31,27 @@
 
                         <div class="form-group">
                             <label>Jenis Layanan</label>
-                            <select name="layanan_id" id="layanan_id" class="form-control" required onchange="sum()">
+                            <select name="layanan_id" id="layanan_id" class="form-control" required
+                                onchange="layanan()">
                                 <option value="">Pilih Layanan</option>
                                 @foreach($layanans as $layanan)
-                                <option value="{{ $layanan->id }}" data-harga="{{ $layanan->harga }}">{{ $layanan->nama }}</option>
+                                <option value="{{ $layanan->id }}" data-harga="{{ $layanan->harga }}"
+                                    data-express="{{ $layanan->flag_express }}">{{ $layanan->nama }}
+                                    {{ $layanan->flag_express ? "- Layanan Express" : "" }}</option>
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group" id="satuan" style="display: none">
+                            <label>Jenis Satuan</label>
+                            <select id="satuan_id" class="form-control" onchange="satuan()">
+                                <option value="Kilogram">Kilogram</option>
+                                <option value="Satuan">Satuan</option>
+                            </select>
+                        </div>
                         <div class="form-group">
-                            <label>Berat</label>
-                            <input type="number" id="berat" name="berat" class="form-control" placeholder="Masukan Berat" onchange="sum()" required>
+                            <label>Qty</label>
+                            <input type="number" id="berat" name="qty" class="form-control"
+                                placeholder="Masukan Berat Kilogram" onchange="sum()" required>
                         </div>
                         <div class="form-group">
                             <label>Total</label>
@@ -57,11 +69,32 @@
 @push('scripts')
 
 <script>
+    let flagExpress = false;
+    let layananId = '';
+    let total = false;
     const sum = () => {
         let layanan = $('#layanan_id').find('option:selected')
         let harga = layanan.data('harga') || 0
         let berat = $('#berat').val() || 0
         $('#total').val(harga * berat)
+    }
+
+    const layanan = () => {
+        let flagExpress = $('#layanan_id').find('option:selected').data('express')
+        if(flagExpress){
+            $('#satuan').show()
+        } else {
+            $('#satuan_id').val('Kilogram')
+            $('#satuan').hide()
+        }
+    }
+
+    const satuan = () => {
+        let satuan = $('#satuan_id').find('option:selected').data('express')
+        console.log(satuan)
+        let berat = $('#berat')
+        berat.val(0)
+        berat.attr('placeholder', "Masukan Berat Kilogram")
     }
 </script>
 @endpush
