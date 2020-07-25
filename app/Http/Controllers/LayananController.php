@@ -43,6 +43,8 @@ class LayananController extends Controller
     public function store(Request $request)
     {
         try {
+            if($request->flag_express)
+            $request = $request->merge(['flag_express' => true]);
             $data = Layanan::create($request->except('_token'));
 
             return redirect()->route('layanan.index')->withMessage('Request successfully executed');
@@ -87,7 +89,9 @@ class LayananController extends Controller
         $layanan->harga = $request->harga;
         $layanan->waktu = $request->waktu;
         $layanan->harga_satuan = $request->harga_satuan;
-        $layanan->flag_express = $request->flag_express;
+        if($request->flag_express)
+            $layanan->flag_express = $request->flag_express;
+
         $layanan->save();
 
         return redirect()->route('layanan.index');
