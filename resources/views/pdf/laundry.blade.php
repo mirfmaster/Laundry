@@ -63,10 +63,13 @@
         .page-break {
             page-break-after: always;
         }
+
     </style>
 
     <div style="font-family:Arial; font-size:12px;">
-
+        <?php
+            $flagLunas = $data->pembayaran === $data->total ? true : false;
+        ?>
         <span>Laundry Receipt</span>
         <br>
         <br>
@@ -92,21 +95,27 @@
                 <td>{{ $data->berat }}</td>
             </tr>
             <tr>
-                <td>Harga</td>
-                <td width="10">:</td>
-                <td>{{ $data->layanan->harga }}</td>
-            </tr>
-            <tr>
                 <td>Total</td>
                 <td width="10">:</td>
-                <td>{{ $data->berat * $data->layanan->harga }}</td>
+                <td>{{ $data->total }}</td>
+            </tr>
+            <tr>
+                <td>Pembayaran</td>
+                <td width="10">:</td>
+                <td>{{ $data->pembayaran }}</td>
+            </tr>
+            <tr>
+                <td width="120">Status</td>
+                <td width="10">:</td>
+                <td>{{ !$flagLunas ? "Belum lunas" : "Lunas" }}</td>
             </tr>
         </table>
     </div>
     <br>
+    @if(!$flagLunas)
     <span style="font-size: 10px">
         Bawa struk ini saat pengambilan</span>
-    <!-- <div class="page-break"></div> -->
+    @endif
 </body>
 </head>
 

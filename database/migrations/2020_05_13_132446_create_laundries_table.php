@@ -17,7 +17,10 @@ class CreateLaundriesTable extends Migration
             $table->id();
             $table->string('nama_pelanggan');
             $table->string('telp')->nullable();
-            $table->integer('berat');
+            $table->integer('berat')->nullable();
+            $table->boolean('flagSatuan')->default(0);
+            $table->integer('satuan')->nullable();
+            $table->integer('pembayaran')->default(0);
             $table->integer('total');
             $table->boolean('flagSelesai')->default(0);
             $table->boolean('flagDiambil')->default(0);

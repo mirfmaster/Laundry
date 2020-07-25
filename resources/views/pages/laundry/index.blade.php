@@ -28,7 +28,7 @@
                             <tr>
                                 <th scope="col">Nama Pelanggan</th>
                                 <th scope="col">Berat</th>
-                                <th scope="col">Selesai</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Diambil oleh</th>
                                 <th scope="col">Tanggal Laundry</th>
                                 <th scope="col">Actions</th>
@@ -43,16 +43,20 @@
                                 <td>{{ $laundry->flagDiambil ? $laundry->pengambil : "Belum diambil" }}</td>
                                 <td>{{ $laundry->created_at->format('d M Y H:i') }}</td>
                                 <td>
-                                    <button type="submit" class="btn" style="padding: 5px 6px;font-size:1.7rem" title="Details" onclick="handleDetail({{$laundry}})">
+                                    <button type="submit" class="btn" style="padding: 5px 6px;font-size:1.7rem"
+                                        title="Details" onclick="handleDetail({{$laundry}})">
                                         <i class="nc-icon nc-bullet-list-67 text-warning"></i>
                                     </button>
                                     @if($laundry->flagSelesai && !$laundry->flagDiambil)
-                                    <button type="submit" class="btn" style="padding: 5px 6px;font-size:1.7rem" onclick="handleAmbil({{$laundry->id}})">
+                                    <button type="submit" class="btn" style="padding: 5px 6px;font-size:1.7rem"
+                                        onclick="handleAmbil({{$laundry}})"
+                                        title="Laundry telah dilunasi dan akan diambil">
                                         <i class="nc-icon nc-simple-remove text-info"></i>
                                     </button>
                                     @endif
                                     @if(!$laundry->flagSelesai)
-                                    <button type="submit" class="btn" style="padding: 5px 6px;font-size:1.7rem" onclick="handleDone({{$laundry->id}})">
+                                    <button type="submit" class="btn" style="padding: 5px 6px;font-size:1.7rem"
+                                        onclick="handleDone({{$laundry->id}})" title="Laundry telah selesai">
                                         <i class="nc-icon nc-simple-remove text-danger"></i>
                                     </button>
                                     @endif
@@ -69,7 +73,8 @@
 
 
 <!-- Modal Detail -->
-<div class="modal fade" id="modalDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document" style="max-width: 800px">
         <div class="modal-content">
             <div class="modal-header">
@@ -147,10 +152,10 @@
                         flagSelesai: 1,
                         _token: "{{ csrf_token() }}"
                     },
-                    success: function(data) {
+                    success: function (data) {
                         return data
                     },
-                    error: function(e) {
+                    error: function (e) {
                         console.log(e)
                     }
                 });
@@ -167,10 +172,13 @@
 
     }
 
-    const handleAmbil = (id) => {
+    const handleAmbil = (data) => {
+        console.log(data)
         Swal.fire({
-            title: 'Laundry telah diambil siapa?',
+            title: 'Laundry akan dianggap sudah melakukan pelunasan.',
+            text: 'Laundry telah diambil siapa?',
             input: 'text',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -178,17 +186,18 @@
             showLoaderOnConfirm: true,
             preConfirm: (value) => {
                 return $.ajax({
-                    url: `laundry/${id}/`,
+                    url: `laundry/${data.id}/`,
                     type: 'PATCH',
                     data: {
                         flagDiambil: 1,
                         pengambil: value,
+                        pembayaran: data.total,
                         _token: "{{ csrf_token() }}"
                     },
-                    success: function(data) {
+                    success: function (data) {
                         return data
                     },
-                    error: function(e) {
+                    error: function (e) {
                         console.log(e)
                     }
                 });
@@ -197,12 +206,16 @@
         }).then((result) => {
             if (result.value) {
                 Swal.fire({
-                    title: `Status telah diubah!`,
+                    title: `Request berhasil di eksekusi, silahkan print receipt pelunasan!`,
                     icon: "success"
-                }).then(() => location.reload())
+                }).then(() => {
+                    let newWindow = window.open(`{{ url('laundry/receipt/') }}/${data.id}`)
+                    newWindow.location
+                })
             }
         })
 
     }
+
 </script>
 @endpush

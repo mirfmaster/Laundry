@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Laundry;
 use App\Layanan;
-use PDF;
+use App\Member;
 use Illuminate\Http\Request;
+use PDF;
 
 class LaundryController extends Controller
 {
@@ -29,8 +30,9 @@ class LaundryController extends Controller
     public function create()
     {
         $layanans = Layanan::all();
+        $member = Member::all();
 
-        return view('pages.laundry.form', compact(['layanans']));
+        return view('pages.laundry.form', compact(['layanans', 'member']));
     }
 
     /**
@@ -42,9 +44,15 @@ class LaundryController extends Controller
     public function store(Request $request)
     {
         $laundry = new Laundry;
+
         $laundry->nama_pelanggan = $request->nama_pelanggan;
         $laundry->telp = $request->telp;
         $laundry->berat = $request->berat;
+        $laundry->pembayaran = $request->pembayaran;
+        $laundry->satuan = $request->satuan;
+        if ($request->satuan) {
+            $laundry->flagSatuan = true;
+        }
         $laundry->total = $request->total;
         $laundry->layanan_id = $request->layanan_id;
         $laundry->save();
@@ -83,8 +91,9 @@ class LaundryController extends Controller
      */
     public function update(Request $request, Laundry $laundry)
     {
-        if ($laundry->update($request->all()))
+        if ($laundry->update($request->all())) {
             return 1;
+        }
 
         return 0;
     }
@@ -103,7 +112,7 @@ class LaundryController extends Controller
     public function receipt($id)
     {
         $data = Laundry::with(['layanan'])->findOrFail($id);
-        $pdf = PDF::loadView('pdf.laundry', compact(['data', 'readonly']));
+        $pdf = PDF::loadView('pdf.laundry', compact(['data']));
 
         return $pdf->stream();
     }
