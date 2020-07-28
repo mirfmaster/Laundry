@@ -19,6 +19,22 @@
                 </div>
 
                 <div class="col-12">
+                    <form action="{{ route('cetaklaundry') }}" method="post">
+                        @csrf
+                        <div class="row">
+                            <div class="col col-md-4">
+                                <input type="date" class="form-control" name="start_date">
+                            </div>
+                            <div class="col col-md-4">
+                                <input type="date" class="form-control" name="end_date">
+                            </div>
+                            <div class="col col-md-4">
+                                <button type="reset" class="btn btn-warning">Reset</button>
+                                <button type="submit" class="btn btn-primary">Cetak Laporan</button>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
 
                 <div class="table-responsive">
@@ -55,7 +71,8 @@
 </div>
 
 <!-- Modal Detail -->
-<div class="modal fade" id="modalDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document" style="max-width: 800px">
         <div class="modal-content">
             <div class="modal-header">
@@ -120,5 +137,6 @@
 
         $('#modalDetails').modal('show')
     }
+
 </script>
 @endpush

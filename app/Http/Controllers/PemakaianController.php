@@ -7,8 +7,8 @@ use App\Item;
 use App\Laundry;
 use App\Pemakaian;
 use App\PemakaianDetail;
-use PDF;
 use Illuminate\Http\Request;
+use PDF;
 
 class PemakaianController extends Controller
 {
@@ -122,9 +122,9 @@ class PemakaianController extends Controller
         //
     }
 
-    public static function receipt($id, $readonyl = false)
+    public static function receipt($id, $readonly = false)
     {
-        $data = Pemakaian::with(['customer', 'user', 'details.sukucadang'])->findOrFail($id);
+        $data = Pemakaian::with(['customer', 'user'])->findOrFail($id);
         $pdf = PDF::loadView('pdf.receipt', compact(['data', 'readonly']));
 
         return $pdf->stream();
@@ -136,5 +136,16 @@ class PemakaianController extends Controller
         $type = 'laporanpemakaian';
 
         return view('pages.pemakaian.index', compact(['data', 'type']));
+    }
+
+    public function cetak(Request $request)
+    {
+        $from = $request->start_date . " 00:00";
+        $to = $request->end_date . " 23:59";
+        $data = Laundry::whereBetween('created_at', [$from, $to])->with(['layanan'])->get();
+
+        $pdf = PDF::loadView('pdf.laporanlaundry', compact(['data']));
+
+        return $pdf->stream();
     }
 }
