@@ -123,12 +123,12 @@
             discount = 0.05;
             inputPelanggan.val(findMember.nama).attr('readonly', true)
             $('#found').show()
-            sum()
         } else {
             discount = 0;
             inputPelanggan.val('').attr('readonly', false)
             $('#found').hide()
         }
+        sum()
     }
 
 </script>
