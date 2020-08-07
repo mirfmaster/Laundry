@@ -79,7 +79,7 @@
     let flagExpress = false;
     let flagSatuan = false;
     let layananId = '';
-    let discount = 1;
+    let discount = 0;
     let members = @json($member);
     let total = false;
 
