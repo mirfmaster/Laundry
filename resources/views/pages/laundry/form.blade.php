@@ -88,8 +88,8 @@
         let harga = flagSatuan ? layanan.data('satuan') : layanan.data('harga') || 0;
         let berat = $('#berat').val() || 0
 
-        let total = $('#total')
-        total.val(total.val() - harga * berat * discount)
+        let total = harga * berat
+        $('#total').val(total -  total * discount)
     }
 
     const layanan = () => {
@@ -125,7 +125,7 @@
             $('#found').show()
             sum()
         } else {
-            discount = 1;
+            discount = 0;
             inputPelanggan.val('').attr('readonly', false)
             $('#found').hide()
         }
