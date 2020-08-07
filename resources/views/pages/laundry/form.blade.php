@@ -87,7 +87,9 @@
         let layanan = $('#layanan_id').find('option:selected')
         let harga = flagSatuan ? layanan.data('satuan') : layanan.data('harga') || 0;
         let berat = $('#berat').val() || 0
-        $('#total').val(harga * berat * discount)
+
+        let total = $('#total')
+        total.val(total.val() - harga * berat * discount)
     }
 
     const layanan = () => {
