@@ -118,7 +118,7 @@
         const inputPelanggan = $('#nama_pelanggan')
         let findMember = members.find((member) => member.telp == e.value)
         if (findMember) {
-            discount = 0.1;
+            discount = 0.05;
             inputPelanggan.val(findMember.nama).attr('readonly', true)
             $('#found').show()
             sum()
