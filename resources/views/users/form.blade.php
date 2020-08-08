@@ -27,26 +27,29 @@
                         @endif
                         <div class="form-group">
                             <label>Nama</label>
-                            <input type="text" name="name" required class="form-control" placeholder="Masukan Nama" value="{{ $data->name }}">
+                            <input type="text" name="name" required class="form-control" placeholder="Masukan Nama"
+                                value="{{ $data->name }}">
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" name="email" required class="form-control" placeholder="Masukan Alamat" value="{{ $data->email }}">
+                            <input type="email" name="email" required class="form-control" placeholder="Masukan Alamat"
+                                value="{{ $data->email }}">
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" name="password" id="password" minlength="8" class="form-control" placeholder="Masukan Password" value="">
+                            <input type="password" name="password" id="password" minlength="8" class="form-control"
+                                placeholder="Masukan Password" value="">
                         </div>
                         <?php
                         $selectedAdmin = $data->level == 'admin' ? 'selected' : '';
-                        $selectedKepala = $data->level == 'kepala' ? 'selected' : '';
+                        // $selectedKepala = $data->level == 'kepala' ? 'selected' : '';
                         $selectedKasir = $data->level == 'kasir' ? 'selected' : '';
                         ?>
                         <div class="form-group">
                             <label>Level</label>
                             <select class="form-control" name="level">
                                 <option value="admin" {{ $selectedAdmin }}>Admin</option>
-                                <option value="kepala" {{ $selectedKepala }}>Kepala Cabang</option>
+                                {{-- <option value="kepala" {{ $selectedKepala }}>Kepala Cabang</option> --}}
                                 <option value="kasir" {{ $selectedKasir }}>Kasir</option>
                             </select>
                         </div>
@@ -67,5 +70,6 @@
             e.preventDefault()
         }
     })
+
 </script>
 @endpush

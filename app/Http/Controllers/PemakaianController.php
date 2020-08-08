@@ -19,7 +19,7 @@ class PemakaianController extends Controller
      */
     public function index()
     {
-        $data = Laundry::with(['user', 'details.item'])->get();
+        $data = Laundry::with(['user', 'layanan'])->get();
         $type = 'pemakaian';
 
         return view('pages.pemakaian.index', compact(['data', 'type']));
@@ -48,7 +48,6 @@ class PemakaianController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $data = [];
         for ($i = 0; $i < count($request->item_id); $i++) {
             array_push($data, ["item_id" => $request->item_id[$i], "harga_jual" => $request->harga_jual[$i], "harga_beli" => $request->harga_beli[$i], "total" => $request->total[$i], "jumlah" => $request->jumlah[$i]]);
@@ -57,7 +56,6 @@ class PemakaianController extends Controller
         $pemakaian = new Pemakaian;
         $pemakaian->no_faktur = $request->no_faktur;
         $pemakaian->user_id = $request->user_id;
-        // dd($pemakaian, $data);
 
         if ($pemakaian->save()) {
             foreach ($data as $item) {
@@ -73,7 +71,6 @@ class PemakaianController extends Controller
             }
 
             return redirect()->back()->withMessage('Request successfully executed.');
-            // Click <a href="' . route('receipt', $pemakaian->id) . '" style="color:#ef8157" target="_blank">here</a> to print receipt
         }
     }
 
@@ -140,9 +137,14 @@ class PemakaianController extends Controller
 
     public function cetak(Request $request)
     {
-        $from = $request->start_date . " 00:00";
-        $to = $request->end_date . " 23:59";
-        $data = Laundry::whereBetween('created_at', [$from, $to])->with(['layanan'])->get();
+        $data = Laundry::with(['layanan']);
+        if ($request->start_date && $request->end_date) {
+            $from = $request->start_date . " 00:00";
+            $to = $request->end_date . " 23:59";
+            $data = $data->whereBetween('created_at', [$from, $to]);
+        }
+
+        $data = $data->get();
 
         $pdf = PDF::loadView('pdf.laporanlaundry', compact(['data']));
 

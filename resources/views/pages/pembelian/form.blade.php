@@ -26,7 +26,8 @@
 
                         <div class="form-group">
                             <label>Metode Bayar</label>
-                            <input type="text" name="metode_bayar" class="form-control" placeholder="Masukan Pembayaran" autofocus>
+                            <input type="text" name="metode_bayar" class="form-control" placeholder="Masukan Pembayaran"
+                                autofocus>
                         </div>
                         <div class="form-group">
                             <label>Supplier</label>
@@ -44,8 +45,10 @@
                                         <h3 class="mb-0">Daftar Barang</h3>
                                     </div>
                                     <div class="col-1">
-                                        <i class="nc-icon nc-simple-add" style="font-size:20px;color:red;cursor:pointer" onclick="addItem()"></i>
-                                        <i class="nc-icon nc-simple-delete" style="font-size:20px;color:red;cursor:pointer" onclick="removeItem()"></i>
+                                        <i class="nc-icon nc-simple-add" style="font-size:20px;color:red;cursor:pointer"
+                                            onclick="addItem()"></i>
+                                        <i class="nc-icon nc-simple-delete"
+                                            style="font-size:20px;color:red;cursor:pointer" onclick="removeItem()"></i>
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +58,8 @@
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label> Nama Item </label>
-                                            <select name="item_id[]" id="item1" class="form-control" required onchange="handleItem(this, 1)">
+                                            <select name="item_id[]" id="item1" class="form-control" required
+                                                onchange="handleItem(this, 1)">
                                                 <option value="">Pilih Item</option>
                                                 @foreach($items as $item)
                                                 <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -66,13 +70,15 @@
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label> Harga Beli </label>
-                                            <input type="text" name="harga_beli[]" onkeypress="validate(event)" onfocusout="sum(1)" class="form-control" id="harga1" required>
+                                            <input type="text" name="harga_beli[]" onkeypress="validate(event)"
+                                                onfocusout="sum(1)" class="form-control" id="harga1" required>
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label> Jumlah </label>
-                                            <input type="text" name="jumlah[]" onkeypress="validate(event)" onfocusout="sum(1)" class="form-control" id="jumlah1" required>
+                                            <input type="text" name="jumlah[]" onkeypress="validate(event)"
+                                                onfocusout="sum(1)" class="form-control" id="jumlah1" required>
                                         </div>
                                     </div>
                                     <div class="col-3">
@@ -148,6 +154,37 @@
                                         </div>
                                     </div>
                                 </div>`
+        component = `<div class="row" id="item${items}">
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label> Nama Item </label>
+                                            <select name="item_id[]" id="item${items}" class="form-control" required onchange="handleItem(this, ${items})">
+                                                <option value="">Pilih Item</option>
+                                                @foreach($items as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label> Harga Beli </label>
+                                            <input type="text" name="harga_beli[]" onkeypress="validate(event)" onfocusout="sum(${items})" class="form-control" id="harga${items}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label> Jumlah </label>
+                                            <input type="text" name="jumlah[]" onkeypress="validate(event)" onfocusout="sum(${items})" class="form-control" id="jumlah${items}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label> Total </label>
+                                            <input type="text" name="total[]" class="form-control" readonly id="total${items}">
+                                        </div>
+                                    </div>
+                                </div>`;
 
         $('#container_item').append(component)
     }
@@ -196,5 +233,6 @@
             if (theEvent.preventDefault) theEvent.preventDefault();
         }
     }
+
 </script>
 @endpush
