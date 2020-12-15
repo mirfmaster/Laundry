@@ -77,6 +77,7 @@
                 <th class="tg-3wr7">Jenis Layanan</th>
                 <th class="tg-3wr7">Harga</th>
                 <th class="tg-3wr7">Berat</th>
+                <th class="tg-3wr7">Satuan</th>
                 <th class="tg-3wr7">Total</th>
                 <th class="tg-3wr7">Status</th>
                 <th class="tg-3wr7">Tanggal Laundry</th>
@@ -90,7 +91,9 @@
                 <td>{{ $laundry->layanan->nama }}</td>
                 <td>{{ $laundry->layanan->harga }}</td>
                 <td>{{ $laundry->berat }}</td>
-                <td>{{ $laundry->berat * $laundry->layanan->harga }}</td>
+                <td>{{ $laundry->satuan }}</td>
+                <td>{{ $laundry->flagSatuan ?$laundry->satuan * $laundry->layanan->harga : $laundry->berat * $laundry->layanan->harga }}
+                </td>
                 <td>{{ $laundry->flagSelesai ? "Selesai" : "On Proses" }}</td>
                 <td>{{ date('d-M-Y H:i', strtotime($laundry->created_at)) }}</td>
             </tr>

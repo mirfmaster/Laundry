@@ -46,6 +46,7 @@
                                 <th scope="col">Jenis Layanan</th>
                                 <th scope="col">Harga</th>
                                 <th scope="col">Berat</th>
+                                <th class="tg-3wr7">Satuan</th>
                                 <th scope="col">Total</th>
                                 <th scope="col">Tanggal Laundry</th>
                             </tr>
@@ -58,7 +59,9 @@
                                 <td>{{ $pemakaian->layanan->nama }}</td>
                                 <td>{{ $pemakaian->layanan->harga }}</td>
                                 <td>{{ $pemakaian->berat }}</td>
-                                <td>{{ $pemakaian->berat * $pemakaian->layanan->harga }}</td>
+                                <td>{{ $pemakaian->satuan }}</td>
+                                <td>{{ $pemakaian->flagSatuan ? $pemakaian->satuan * $pemakaian->layanan->harga : $pemakaian->berat * $pemakaian->layanan->harga }}
+                                </td>
                                 <td>{{ date('d-M-Y H:i', strtotime($pemakaian->created_at)) }}</td>
                             </tr>
                             @endforeach
