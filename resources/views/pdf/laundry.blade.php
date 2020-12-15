@@ -89,11 +89,20 @@
                 <td width="10">:</td>
                 <td>{{ $data->layanan->nama }}</td>
             </tr>
+            @if($data->berat)
             <tr>
                 <td>Berat</td>
                 <td width="10">:</td>
                 <td>{{ $data->berat }}</td>
             </tr>
+            @endif
+            @if($data->satuan)
+            <tr>
+                <td>Satuan</td>
+                <td width="10">:</td>
+                <td>{{ $data->satuan }}</td>
+            </tr>
+            @endif
             <tr>
                 <td>Total</td>
                 <td width="10">:</td>
